@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Conversor de Medidas</title>
+  <script>
+    function converterMedidas() {
+      var opcao = document.getElementById("opcao").value;
+      
+      if (opcao == "comprimento") {
+        converterComprimento();
+      } else if (opcao == "massa") {
+        converterMassa();
+      } else if (opcao == "volume") {
+        converterVolume();
+      } else {
+        alert("Opção inválida. Por favor, selecione uma opção válida.");
+      }
+    }
+    
+    function converterComprimento() {
+      var unidadeOrigem = document.getElementById("comprimento_origem").value;
+      var valor = parseFloat(document.getElementById("valor").value);
+      var unidadeDestino = document.getElementById("comprimento_destino").value;
+      var resultado = 0;
+      var unidade = "";
+      
+      // Converter para metros como unidade intermediária
+      if (unidadeOrigem == "km") {
+        resultado = valor * 1000;
+      } else if (unidadeOrigem == "m") {
+        resultado = valor;
+      } else if (unidadeOrigem == "cm") {
+        resultado = valor / 100;
+      } else if (unidadeOrigem == "mm") {
+        resultado = valor / 1000;
+      } else {
+        alert("Unidade de origem inválida.");
+        return;
+      }
+      
+      // Converter para a unidade de destino
+      if (unidadeDestino == "km") {
+        resultado /= 1000;
+        unidade = "quilômetros";
+      } else if (unidadeDestino == "m") {
+        unidade = "metros";
+      } else if (unidadeDestino == "cm") {
+        resultado *= 100;
+        unidade = "centímetros";
+      } else if (unidadeDestino == "mm") {
+        resultado *= 1000;
+        unidade = "milímetros";
+      } else {
+        alert("Unidade de destino inválida.");
+        return;
+      }
+      
+      document.getElementById("resultado").innerHTML = valor + " " + unidadeOrigem + " é igual a " + resultado.toFixed(2) + " " + unidade + ".";
+    }
+    
+    function converterMassa() {
+      var unidadeOrigem = document.getElementById("massa_origem").value;
+      var valor = parseFloat(document.getElementById("valor").value);
+      var unidadeDestino = document.getElementById("massa_destino").value;
+      var resultado = 0;
+      var unidade = "";
+      
+      // Converter para gramas como unidade intermediária
+      if (unidadeOrigem == "kg") {
+        resultado = valor * 1000;
+      } else if (unidadeOrigem == "g") {
+        resultado = valor;
+      } else if (unidadeOrigem == "mg") {
+        resultado = valor / 1000;
+      } else {
+        alert("Unidade de origem inválida.");
+        return;
+      }
+      
+      // Converter para a unidade de destino
+      if (unidadeDestino == "kg") {
+        resultado /= 1000;
+        unidade = "quilogramas";
+      } else if (unidadeDestino == "g") {
+        unidade = "gramas";
+      } else if (unidadeDestino == "mg") {
+        resultado *= 1000;
+        unidade = "miligramas";
+      } else {
+        alert("Unidade de destino inválida.");
+        return;
+      }
+      
+      document.getElementById("resultado").innerHTML = valor + " " + unidadeOrigem + " é igual a " + resultado.toFixed(2) + " " + unidade + ".";
+    }
+    
+    function converterVolume() {
+      var unidadeOrigem = document.getElementById("volume_origem").value;
+      var valor = parseFloat(document.getElementById("valor").value);
+      var unidadeDestino = document.getElementById("volume_destino").value;
+      var resultado = 0;
+      var unidade = "";
+      
+      // Converter para litros como unidade intermediária
+      if (unidadeOrigem == "m3") {
+        resultado = valor * 1000;
+      } else if (unidadeOrigem == "L") {
+        resultado = valor;
+      } else if (unidadeOrigem == "mL") {
+        resultado = valor / 1000;
+      } else {
+        alert("Unidade de origem inválida.");
+        return;
+      }
+      
+      // Converter para a unidade de destino
+      if (unidadeDestino == "m3") {
+        resultado /= 1000;
+        unidade = "metros cúbicos";
+      } else if (unidadeDestino == "L") {
+        unidade = "litros";
+      } else if (unidadeDestino == "mL") {
+        resultado *= 1000;
+        unidade = "mililitros";
+      } else {
+        alert("Unidade de destino inválida.");
+        return;
+      }
+      
+      document.getElementById("resultado").innerHTML = valor + " " + unidadeOrigem + " é igual a " + resultado.toFixed(2) + " " + unidade + ".";
+    }
+  </script>
+</head>
+<body>
+  <h1>Conversor de Medidas</h1>
+  
+  <p>Selecione a opção de conversão:</p>
+  <select id="opcao">
+    <option value="comprimento">Comprimento</option>
+    <option value="massa">Massa</option>
+    <option value="volume">Volume</option>
+  </select>
+  
+  <p>Valor:</p>
+  <input type="number" id="valor">
+  
+  <div id="comprimento" style="display: none;">
+    <p>Selecione a unidade de origem:</p>
+    <select id="comprimento_origem">
+      <option value="km">Quilômetro (km)</option>
+      <option value="m">Metro (m)</option>
+      <option value="cm">Centímetro (cm)</option>
+      <option value="mm">Milímetro (mm)</option>
+    </select>
+    
+    <p>Selecione a unidade de destino:</p>
+    <select id="comprimento_destino">
+      <option value="km">Quilômetro (km)</option>
+      <option value="m">Metro (m)</option>
+      <option value="cm">Centímetro (cm)</option>
+      <option value="mm">Milímetro (mm)</option>
+    </select>
+  </div>
+  
+  <div id="massa" style="display: none;">
+    <p>Selecione a unidade de origem:</p>
+    <select id="massa_origem">
+      <option value="kg">Quilogramas (kg)</option>
+      <option value="g">Grama (g)</option>
+      <option value="mg">Miligrama (mg)</option>
+    </select>
+    
+    <p>Selecione a unidade de destino:</p>
+    <select id="massa_destino">
+      <option value="kg">Quilogramas (kg)</option>
+      <option value="g">Gramas (g)</option>
+      <option value="mg">Miligramas (mg)</option>
+    </select>
+  </div>
+  
+  <div id="volume" style="display: none;">
+    <p>Selecione a unidade de origem:</p>
+    <select id="volume_origem">
+      <option value="m3">Metro cúbico (m³)</option>
+      <option value="L">Litro (L)</option>
+      <option value="mL">Mililitro (mL)</option>
+    </select>
+    
+    <p>Selecione a unidade de destino:</p>
+    <select id="volume_destino">
+      <option value="m3">Metro cúbico (m³)</option>
+      <option value="L">Litro (L)</option>
+      <option value="mL">Mililitro (mL)</option>
+    </select>
+  </div>
+  
+  <br>
+  <button onclick="converterMedidas()">Converter</button>
+  
+  <h2>Resultado:</h2>
+  <p id="resultado"></p>
+  
+  <script>
+    // Mostrar as opções corretas com base na seleção inicial
+    var opcao = document.getElementById("opcao").value;
+    mostrarOpcoes(opcao);
+    
+    // Atualizar as opções mostradas quando a opção é alterada
+    document.getElementById("opcao").onchange = function() {
+      var opcao = document.getElementById("opcao").value;
+      mostrarOpcoes(opcao);
+    };
+    
+    function mostrarOpcoes(opcao) {
+      document.getElementById("comprimento").style.display = "none";
+      document.getElementById("massa").style.display = "none";
+      document.getElementById("volume").style.display = "none";
+      
+      if (opcao == "comprimento") {
+        document.getElementById("comprimento").style.display = "block";
+      } else if (opcao == "massa") {
+        document.getElementById("massa").style.display = "block";
+      } else if (opcao == "volume") {
+        document.getElementById("volume").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
